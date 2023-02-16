@@ -1,0 +1,88 @@
+.primary-background {
+  background-color: #0f0e17;
+}
+
+.headline-color {
+  color: #fffffe;
+}
+
+.headline-color::selection{
+  columns: #fffffe;
+}
+.headline-color:hover{
+  columns: #fffffe;
+}
+
+.paragraph-color {
+  color: #a7a9be;
+}
+
+.btn-primary {
+  background-color: #ff8906;
+  border-color: #ff8906;
+  color: #fffffe;
+}
+
+.btn-primary:hover {
+  background-color: #e27900;
+  border-color: #e27900;
+  color: #fffffe;
+}
+
+.btn-primary:active {
+  background-color: #ff9d2c;
+  border-color: #ff9d2c;
+  color: #fffffe;
+}
+
+.btn-secondary {
+  background-color: #f25f4c;
+  border-color: #f25f4c;
+  color: #fffffe;
+}
+
+a {
+  font-weight: 600;
+}
+
+
+.sticky-top.scrolled {
+  background-color: #0f0e17 !important;
+  transition: background-color 200ms linear;
+}
+
+.scrolled a {
+  color: #fffffe;
+}
+
+
+.arrow {
+  text-align: center;
+  margin: 8% 0;
+}
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+
+.arrow a {
+  text-decoration: none;
+  color: #ff8906;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
