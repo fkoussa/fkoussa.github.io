@@ -1,9 +1,15 @@
 let schoolums = new Vue({
   el: "#app",
+  mounted() {
+    fetch("http://localhost:3000/api/lessons")
+      .then((res) => res.json())
+      .then((data) => (this.products = data));
+  },
+
   data: {
     sitename: "School UMS",
     page: "products",
-    products: products,
+    products: [],
     showProducts: true,
     sortBy: "subject",
     sort_asc_desc: "asc",
@@ -39,8 +45,6 @@ let schoolums = new Vue({
         product.space--;
       }
     },
-
-    // Show the cart page
     showCart() {
       // Toggle
       this.showProducts = this.showProducts ? false : true;
@@ -102,6 +106,58 @@ let schoolums = new Vue({
             if (phone_number_validation !== false) {
               // Initiate checkout
               this.checkout.push(this.order);
+
+              // Prepare order for database
+              var temp_cart = [];
+              for (var i = 0; i < this.cart.length; i++) {
+                temp_cart.push({
+                  id: this.cart[i]._id,
+                  space: this.cart[i].space,
+                });
+              }
+
+              // Send order to database
+              fetch("http://localhost:3000/api/orders", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                cors: "cors",
+                body: JSON.stringify({
+                  name: this.order.firstName,
+                  phone: this.order.phone,
+                  cart: temp_cart,
+                }),
+              })
+                .then(function (res) {
+                  console.log(res);
+                })
+                .catch(function (res) {
+                  console.log(res);
+                });
+
+              // Update Spaces for each lesson
+              for (var i = 0; i < temp_cart.length; i++) {
+                console.log(temp_cart[i]);
+                fetch("http://localhost:3000/api/spaces", {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  cors: "cors",
+                  body: JSON.stringify({
+                    lessonId: temp_cart[i].id,
+                  }),
+                })
+                  .then(function (res) {
+                    console.log(res);
+                  })
+
+                  .catch(function (res) {
+                    console.log(res);
+                  });
+              }
+
               this.order = {
                 firstName: "",
                 lastName: "",
@@ -162,6 +218,8 @@ let schoolums = new Vue({
         });
       } else if (this.sortBy === "subject") {
         return this.products.sort((a, b) => {
+          console.log("a: " + a.subject);
+          console.log("b: " + b.suject);
           if (this.sort_asc_desc === "asc") {
             return a.subject.localeCompare(b.subject);
           } else if (this.sort_asc_desc === "desc") {

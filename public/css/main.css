@@ -6,10 +6,10 @@
   color: #fffffe;
 }
 
-.headline-color::selection{
+.headline-color::selection {
   columns: #fffffe;
 }
-.headline-color:hover{
+.headline-color:hover {
   columns: #fffffe;
 }
 
@@ -45,7 +45,6 @@ a {
   font-weight: 600;
 }
 
-
 .sticky-top.scrolled {
   background-color: #0f0e17 !important;
   transition: background-color 200ms linear;
@@ -55,6 +54,10 @@ a {
   color: #fffffe;
 }
 
+img {
+  min-height: 234.34px !important;
+  max-height: 234.34px !important;
+}
 
 .arrow {
   text-align: center;
@@ -65,7 +68,6 @@ a {
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite;
 }
-
 
 .arrow a {
   text-decoration: none;
